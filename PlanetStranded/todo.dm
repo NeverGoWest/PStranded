@@ -35,4 +35,8 @@ A weather/cloud system
 Pure biomass terrain, some of it so thick that it is virtually impassable, should spread and
 make areas inaccessible. Should turn lakes into shoggoth pits.
 
+Jakes todo list:
+
+Make hell dimension for ghosts to go untill they are cloned or their owner ragequits.
+
 */

@@ -104,6 +104,11 @@ mob/
 			oview(0) << "[usr] says ''[txt]''"
 		WSay(txt as text)
 			world << "[usr]: [txt]"
+
+		TurnOffTheLights()
+			for(var/turf/T in world)
+				T.luminosity = 0
+
 		Search()
 			var/obj/A
 			var/mob/B

@@ -1,5 +1,7 @@
 turf/
 	text = "<font color=#52F53C bgcolor=#40C92E>."
+	luminosity = 1
+
 
 	var/
 		wood = 0
