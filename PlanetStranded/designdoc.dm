@@ -6,6 +6,7 @@ Remember to build a house to protect yourself from the harsh environment!
 
 AI and intelligence stat:
 The intelligence stat determines what the creature is capable of and what AI it uses.
+Level 0 intelligence is for plants, algae, blobs and barnacle like things, only capable of eating and reproducing.
 Level 1 intelligence uses a dumb AI mostly suited for small critters and grazers, it is capalbe of fleeing when hurt.
 Level 2 intelligence is capable of simple path finding, following its prey. Suited for predators.
 Level 3 intelligence is subhuman, it is capable of working in a pack or flock, like a monkey.

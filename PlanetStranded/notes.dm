@@ -14,4 +14,6 @@ Corpses should slowly turn their biomass into fertilizer.
 
 Body temperature - Dehydration factor: water = water - dehydfactor*(temp - 30 + 1)
 
+Anything that adds or removes resources from existence is a bug.
+
 */

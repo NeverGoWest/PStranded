@@ -23,7 +23,7 @@ obj/
 	verb/
 		PickUp()
 			if(!heavy && usr.encumberment <= 10)
-				set src in view(0)
+				set src in oview(0)
 				src.Move(usr)
 				usr << "You pick up the [src]"
 		Drop()

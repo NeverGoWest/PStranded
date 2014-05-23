@@ -26,6 +26,7 @@ mob/
 
 		// resources
 		wood = 0
+		water = 100
 		grass = 0
 		rock = 0
 		ore = 0
@@ -33,12 +34,28 @@ mob/
 		scrap = 0
 		machineparts = 0
 		electronics = 0
-		food = 0
+		food = 100
 		energy = 0
 		fertilizer = 0
 		fuel = 0
 
+		// the combat variables
+		hitchance = 4
+		armorbonus = 0
+		weaponbonus = 1
+		weapondamage = 1
+
+
 	proc/
+
+		HitMe(dmg, bonus)
+			var/damage
+			if(roll("1d6")>= hitchance - bonus)
+				//view() << "[name] was hit for [dmg - armorbonus] damage!"
+				damage = ((dmg + roll("1d6")) * 10) - armorbonus
+				HurtMe(1, damage)
+
+
 		HurtMe(type, damage)
 			if(type == 1)
 				brute += damage
@@ -55,7 +72,8 @@ mob/
 			if(rads >= 100)
 				cancer = 1
 			else
-				view() << "[usr] hugs [src] with affection!"
+				if(brute <= 0)
+					view() << "[usr] hugs [src] with affection!"
 		Die()
 			var/obj/Objekt
 			var/obj/corpse/C = new/obj/corpse(loc)
@@ -91,7 +109,27 @@ mob/
 
 			del src
 
+	Stat()
 
+		statpanel("Status", "Life:", 100 - brute)
+		statpanel("Status", "Food:", food)
+		statpanel("Status", "Water:", water)
+		statpanel("Resources", "Wood: ", wood)
+		statpanel("Resources", "Water: ", water)
+		statpanel("Resources", "Grass: ", grass)
+		statpanel("Resources", "Rock: ", rock)
+		statpanel("Resources", "Ore: ", ore)
+		statpanel("Resources", "Scrap: ", scrap)
+		statpanel("Resources", "Machine parts: ", machineparts)
+
+
+		/*
+		statpanel(name)
+		stat(src)
+		statpanel("Inventory")
+		stat(contents)*/
+		//statpanel("Combat")
+		//stat(Attack())
 
 	/*Move()
 		view(2, src) << "[src] aa [movementmeth] [dir]"
@@ -100,16 +138,32 @@ mob/
 
 	verb/
 		Say(txt as text)
+			set category = "Chat"
 			usr << "You say ''[txt]''"
 			oview(0) << "[usr] says ''[txt]''"
 		WSay(txt as text)
+			set category = "Chat"
 			world << "[usr]: [txt]"
 
+		Attack(var/mob/M in oview())
+			set category = "Combat"
+			set src in oview(0)
+			M.HitMe(weapondamage, weaponbonus)
+
+		OpenThirdEye()
+			set category = "Debug"
+			client.view = 3
+		Isolate()
+			set category = "Debug"
+			client.view = 1
+
 		TurnOffTheLights()
+			set category = "Debug"
 			for(var/turf/T in world)
 				T.luminosity = 0
 
 		Search()
+			set category = "Action"
 			var/obj/A
 			var/mob/B
 			var/found = 0
@@ -143,6 +197,7 @@ mob/
 				foundppl += 1
 
 		Survey()
+			set category = "Action"
 			if(istype(loc,/turf))
 				var/turf/T = loc
 				usr << "Wood: [T.wood]"
@@ -163,23 +218,28 @@ mob/
 
 		// movement commands
 		East()
+			set category = "Movement"
 			view(0) << "[usr] [movementmeth] east."
 			step(src, EAST)
 			//usr.x = usr.x + 1
 		West()
+			set category = "Movement"
 			view(0) << "[usr] [movementmeth] west."
 			//usr.x = usr.x - 1
 			step(src, WEST)
 		North()
+			set category = "Movement"
 			view(0) << "[usr] [movementmeth] north."
 			//usr.y = usr.y + 1
 			step(src, NORTH)
 		South()
+			set category = "Movement"
 			view(0) << "[usr] [movementmeth] south."
 			//usr.y = usr.y - 1
 			step(src, SOUTH)
 
 		Assemble(thing as text)
+			set category = "Action"
 			if(thing == "car")
 				if(scrap <= 0)
 					usr << "You dont have any grass!"
@@ -189,6 +249,7 @@ mob/
 				usr << "You assemble a car from scrap metal!"
 
 		Extract(type as text)
+			set category = "Action"
 			if(type == "wood")
 				if(istype(loc,/turf))
 					var/turf/T = loc
