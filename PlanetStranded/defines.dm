@@ -19,6 +19,10 @@ obj/
 		description = "Nothingness."
 		heavy = 0
 
+		weapondamage = 1
+		weaponbonus = 0
+		weaponmultiplier = 1
+
 
 	verb/
 		PickUp()
@@ -42,3 +46,9 @@ obj/corpse/
 		usr.food += food
 		world << "[usr] eats the [name]"
 		del src
+obj/axe/
+	name = "Axe"
+	text = ""
+	weapondamage = 50
+	weaponmultiplier = 2
+	weaponbonus = 1

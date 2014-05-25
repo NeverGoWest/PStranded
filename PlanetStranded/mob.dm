@@ -42,8 +42,15 @@ mob/
 		// the combat variables
 		hitchance = 4
 		armorbonus = 0
-		weaponbonus = 1
+		weaponbonus = 0
 		weapondamage = 1
+		weaponmultiplier = 1
+		weapon = "weapon"
+		fistbonus = 0
+		fistdamage = 1 // Damage when unarmed
+		fistmultiplier = 1
+		fist = "Fists"
+		speed = 10
 
 
 	proc/
@@ -52,14 +59,17 @@ mob/
 			var/damage
 			if(roll("1d6")>= hitchance - bonus)
 				//view() << "[name] was hit for [dmg - armorbonus] damage!"
-				damage = ((dmg + roll("1d6")) * 10) - armorbonus
+				damage = ((dmg + (roll("1d6")*bonus))) - armorbonus
 				HurtMe(1, damage)
+			else
+				view() << "[usr] misses [src]!"
 
 
 		HurtMe(type, damage)
 			if(type == 1)
 				brute += damage
 				view() << "[src] was hit for [damage] damage!"
+				view() << "[src]'s health is now [src.brute]"
 			if(type == 2)
 				rads += damage
 			if(type == 3)
@@ -114,6 +124,13 @@ mob/
 		statpanel("Status", "Life:", 100 - brute)
 		statpanel("Status", "Food:", food)
 		statpanel("Status", "Water:", water)
+
+		statpanel("Status", "Wielding: ", weapon)
+		statpanel("Status", "Damage: ", weapondamage)
+		statpanel("Status", "Bonus: ", weaponbonus)
+		statpanel("Status", "Multiplier: ", weaponmultiplier)
+
+		statpanel("Inventory", contents)
 		statpanel("Resources", "Wood: ", wood)
 		statpanel("Resources", "Water: ", water)
 		statpanel("Resources", "Grass: ", grass)
@@ -121,6 +138,11 @@ mob/
 		statpanel("Resources", "Ore: ", ore)
 		statpanel("Resources", "Scrap: ", scrap)
 		statpanel("Resources", "Machine parts: ", machineparts)
+		statpanel("Resources", "Electronic parts: ", electronics)
+		statpanel("Resources", "Food: ", food)
+		statpanel("Resources", "Fertilizer: ", fertilizer)
+		statpanel("Resources", "Chemicals: ", chems)
+		statpanel("Resources", "Fuel: ", fuel)
 
 
 		/*
@@ -149,6 +171,22 @@ mob/
 			set category = "Combat"
 			set src in oview(0)
 			M.HitMe(weapondamage, weaponbonus)
+		Fight(var/mob/M in oview())
+			set category = "Combat"
+			set src in oview(0)
+			while(M.brute < 100)
+				sleep(speed)
+				Attack(M)
+		Wield(var/obj/O)
+			weapondamage = O.weapondamage
+			weaponbonus = O.weaponbonus
+			weaponmultiplier = O.weaponmultiplier
+			weapon = O.name
+		Unwield()
+			weapondamage = fistdamage
+			weaponbonus = fistbonus
+			weaponmultiplier = fistmultiplier
+			weapon = fist
 
 		OpenThirdEye()
 			set category = "Debug"

@@ -8,7 +8,9 @@ Basic AI
 
 Crafting - just implemented, needs more recipes
 
-Combat system - Work on this and damage system now.
+Combat system - Work on this and damage system now. Done. The system is simple but can easily be expanded upon.
+
+Weapon wielding - Working on this now
 
 Damage system - brute, radiation, toxins
 

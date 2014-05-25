@@ -4,7 +4,7 @@ MAP_ICON_TYPE: 0
 WINDOW: main.dm;defines.dm;mob.dm;turfdefines.dm;world.dmm;client.dm;todo.dm;notes.dm;designdoc.dm;lore.dm;area.dm
 LAST_COMPILE_VERSION: 504.1234
 FILE: mob.dm
-LAST_COMPILE_TIME: 1400787761
+LAST_COMPILE_TIME: 1400934894
 AUTO_FILE_DIR: ON
 */
 // END_INTERNALS
