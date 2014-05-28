@@ -22,6 +22,7 @@ obj/
 		weapondamage = 1
 		weaponbonus = 0
 		weaponmultiplier = 1
+		wielded = 0
 
 
 	verb/
@@ -32,6 +33,10 @@ obj/
 				usr << "You pick up the [src]"
 		Drop()
 			set src in usr.contents
+			if(wielded)
+				usr.Unwield()
+				wielded = 0
+
 			loc = usr.loc
 			view(0) << "[usr] drops the [name]"
 

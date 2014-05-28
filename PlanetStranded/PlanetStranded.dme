@@ -21,6 +21,8 @@
 #include "lore.dm"
 #include "main.dm"
 #include "mob.dm"
+#include "mobai.dm"
+#include "movement.dm"
 #include "notes.dm"
 #include "todo.dm"
 #include "turfdefines.dm"

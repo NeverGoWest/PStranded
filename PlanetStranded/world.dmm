@@ -1,17 +1,20 @@
 "a" = (/turf,/area)
-"b" = (/mob/ghost,/turf,/area)
-"c" = (/obj/car,/obj/corpse,/obj/axe,/turf,/area)
-"d" = (/mob/test,/turf,/area)
+"b" = (/turf/forest,/area)
+"c" = (/turf/road,/area)
+"d" = (/mob/ghost,/turf,/area)
+"e" = (/mob/test,/turf,/area)
+"f" = (/obj/car,/obj/corpse,/obj/axe,/turf,/area)
+"g" = (/mob/test2,/turf,/area)
 
 (1,1,1) = {"
 aaaaaaaaaa
-aaaaaaaaaa
-aaaaaaaaaa
-aaaaaaaaaa
-aaaaaaaaaa
-aaaaaaaaaa
-aaaaaaaaaa
-aaabaaaaaa
-aaaaaaaaaa
-acdaaaaaaa
+bbbaaaaaaa
+bbbaaaaaaa
+bbbaaaaaaa
+acaaaaaaaa
+acaaaaaaaa
+acaaaaaaaa
+acadaaaaaa
+aceaaaaaaa
+afegaaaaaa
 "}

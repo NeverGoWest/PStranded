@@ -2,15 +2,20 @@
 
 Runtime system, handles hunger, behavior in NPCs and the cloud system
 
-Creature definition
+Creature definition - working on this
+Creature generation - working on this
 
 Basic AI
 
 Crafting - just implemented, needs more recipes
 
-Combat system - Work on this and damage system now. Done. The system is simple but can easily be expanded upon.
+Combat system - Work on this and damage system now. Done. The system is simple but can easily be expanded upon. Done for now.
 
-Weapon wielding - Working on this now
+Weapon wielding - Done for now.
+
+Dynamic description system - Randomly generated bodily features, scars, tattoos, etc.
+
+Organize files in folders - So we can navigate this a bit easier.
 
 Damage system - brute, radiation, toxins
 
@@ -20,9 +25,9 @@ Plants grow on sunlight, not fertilizer, maybe fertilizer could speed up the gro
 
 Pit Spawn
 
-Raiths
+Kyk's - the stealer/horder cavedwellers that come out at night
 
-Subs
+Subs - the subhuman scum that lives in tribes, abuses chems and breaks machinery!
 
 Animal Taming
 

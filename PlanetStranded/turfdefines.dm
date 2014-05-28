@@ -27,4 +27,17 @@ turf/
 
 		// environment conditions
 		safe = 0 // safe from elements? This is for houses and caves.
+		tbonus = 1 // The divider/multiplier of the players speed, its fast to move along a road, slow to creep around in a forest.
+
+turf/forest/
+	name = "Forest"
+	text = "<font color=#40C92E bgcolor=#33A125>F"
+	tbonus = 0.5
+
+turf/road/
+	name = "Road"
+	text = "<font color=#F2E11F bgcolor=#454545>."
+	tbonus = 2
+
+
 

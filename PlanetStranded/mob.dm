@@ -14,7 +14,16 @@ mob/
 		biomass = 100
 		cancer = 0
 
+		human = 1
+		arms = 2
+		legs = 2
+		heads = 1
+		tails = 0
+		shape = 1
+		description = "Creeping along the landscape, a feeble survivor of a spaceship crash, scavenging the land, salvaging the wreckage."
 
+
+		sex = "male"
 		encumberment = 0
 		movementmeth = "moves"
 		driving = 0 // is this person driving a vehicle?
@@ -42,9 +51,9 @@ mob/
 		// the combat variables
 		hitchance = 4
 		armorbonus = 0
-		weaponbonus = 0
-		weapondamage = 1
-		weaponmultiplier = 1
+		weaponbonus = 1
+		weapondamage = 10
+		weaponmultiplier = 2
 		weapon = "weapon"
 		fistbonus = 0
 		fistdamage = 1 // Damage when unarmed
@@ -94,6 +103,7 @@ mob/
 				var/turf/T = loc
 				T.wood += wood
 				T.grass += grass
+				T.water += water
 				T.rock += rock
 				T.ore += ore
 				T.scrap += scrap
@@ -170,24 +180,39 @@ mob/
 		Attack(var/mob/M in oview())
 			set category = "Combat"
 			set src in oview(0)
-			M.HitMe(weapondamage, weaponbonus)
+			var/dmg
+			var/bonus
+			dmg = usr.weapondamage
+			bonus = usr.weaponbonus
+			M.HitMe(dmg, bonus)
 		Fight(var/mob/M in oview())
 			set category = "Combat"
 			set src in oview(0)
 			while(M.brute < 100)
 				sleep(speed)
 				Attack(M)
+				world << "[usr.weapon] [usr.weapondamage] [usr.weaponbonus] [usr.weaponmultiplier]"
+				world << "[M.weapon] [M.weapondamage] [M.weaponbonus] [M.weaponmultiplier]"
 		Wield(var/obj/O)
 			weapondamage = O.weapondamage
 			weaponbonus = O.weaponbonus
 			weaponmultiplier = O.weaponmultiplier
 			weapon = O.name
+			O.wielded = 1
 		Unwield()
 			weapondamage = fistdamage
 			weaponbonus = fistbonus
 			weaponmultiplier = fistmultiplier
 			weapon = fist
-
+		Examine()
+			set src in view(0)
+			if(human)
+				usr << "This is a human named [name]."
+				usr << description
+			else
+				usr << "It has [arms] arms, [legs] legs, [heads] heads and [tails] tails"
+				usr << "It is a [shapelist[shape]]"
+				usr << description
 		OpenThirdEye()
 			set category = "Debug"
 			client.view = 3
@@ -240,6 +265,7 @@ mob/
 				var/turf/T = loc
 				usr << "Wood: [T.wood]"
 				usr << "Grass: [T.grass]"
+				usr << "Water: [T.water]"
 				usr << "Rock: [T.rock]"
 				usr << "Ore: [T.ore]"
 				usr << "Scrap metal: [T.scrap]"
@@ -257,21 +283,41 @@ mob/
 		// movement commands
 		East()
 			set category = "Movement"
+			var/terrainbonus
+			if(istype(loc,/turf))
+				var/turf/T = loc
+				terrainbonus = T.tbonus
+			sleep(speed / terrainbonus)
 			view(0) << "[usr] [movementmeth] east."
 			step(src, EAST)
 			//usr.x = usr.x + 1
 		West()
 			set category = "Movement"
+			var/terrainbonus
+			if(istype(loc,/turf))
+				var/turf/T = loc
+				terrainbonus = T.tbonus
+			sleep(speed / terrainbonus)
 			view(0) << "[usr] [movementmeth] west."
 			//usr.x = usr.x - 1
 			step(src, WEST)
 		North()
 			set category = "Movement"
+			var/terrainbonus
+			if(istype(loc,/turf))
+				var/turf/T = loc
+				terrainbonus = T.tbonus
+			sleep(speed / terrainbonus)
 			view(0) << "[usr] [movementmeth] north."
 			//usr.y = usr.y + 1
 			step(src, NORTH)
 		South()
 			set category = "Movement"
+			var/terrainbonus
+			if(istype(loc,/turf))
+				var/turf/T = loc
+				terrainbonus = T.tbonus
+			sleep(speed / terrainbonus)
 			view(0) << "[usr] [movementmeth] south."
 			//usr.y = usr.y - 1
 			step(src, SOUTH)
@@ -315,6 +361,15 @@ mob/
 					T.rock = T.rock - 1
 					usr.rock = usr.rock + 1
 					usr << "You pick up a rock."
+			if(type == "water")
+				if(istype(loc,/turf))
+					var/turf/T = loc
+					if(T.water <= 0)
+						usr << "There is no water here!"
+						return
+					T.water = T.water - 10
+					usr.water = usr.water + 10
+					usr << "You scoop up some water."
 			if(type == "ore")
 				if(istype(loc,/turf))
 					var/turf/T = loc
@@ -365,6 +420,13 @@ mob/
 
 mob/test/
 	text = "Z"
+	weapon = "penis"
+	human = 0
+mob/test2/
+	text = "2"
+	weapon = "dong"
+	human = 1
+	description = "A faggot. Simply that."
 
 mob/ghost/
 	name = "Ghost"
