@@ -2,7 +2,7 @@ obj/
 	var/
 		// resources
 		wood = 0
-		grass = 10
+		grass = 0
 		rock = 0
 		ore = 0
 		scrap = 0

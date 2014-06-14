@@ -49,12 +49,14 @@ mob/
 		fuel = 0
 
 		// the combat variables
+		fighting = 0
+		cancelfight = 0
 		hitchance = 4
 		armorbonus = 0
 		weaponbonus = 1
 		weapondamage = 10
 		weaponmultiplier = 2
-		weapon = "weapon"
+		weapon = "Fists"
 		fistbonus = 0
 		fistdamage = 1 // Damage when unarmed
 		fistmultiplier = 1
@@ -173,6 +175,7 @@ mob/
 			set category = "Chat"
 			usr << "You say ''[txt]''"
 			oview(0) << "[usr] says ''[txt]''"
+
 		WSay(txt as text)
 			set category = "Chat"
 			world << "[usr]: [txt]"
@@ -185,37 +188,60 @@ mob/
 			dmg = usr.weapondamage
 			bonus = usr.weaponbonus
 			M.HitMe(dmg, bonus)
+
 		Fight(var/mob/M in oview())
 			set category = "Combat"
 			set src in oview(0)
+
+			if(usr.loc != M.loc)
+				usr << "Too far away for an attack!"
+				return
+
+			if(usr.fighting)
+				usr << "Cant fight more than one!"
+				return
+			usr.fighting =1
 			while(M.brute < 100)
 				sleep(speed)
 				Attack(M)
-				world << "[usr.weapon] [usr.weapondamage] [usr.weaponbonus] [usr.weaponmultiplier]"
-				world << "[M.weapon] [M.weapondamage] [M.weaponbonus] [M.weaponmultiplier]"
+				if(usr.cancelfight)
+					return
+			usr.cancelfight = 0
+			usr.fighting = 0
+			view(0) << "[usr] finishes fighting"
+
+		Stop()
+			cancelfight = 1
+			view(0) << "[usr] cancels fighting."
+
 		Wield(var/obj/O)
 			weapondamage = O.weapondamage
 			weaponbonus = O.weaponbonus
 			weaponmultiplier = O.weaponmultiplier
 			weapon = O.name
 			O.wielded = 1
+
 		Unwield()
 			weapondamage = fistdamage
 			weaponbonus = fistbonus
 			weaponmultiplier = fistmultiplier
 			weapon = fist
+
 		Examine()
 			set src in view(0)
 			if(human)
 				usr << "This is a human named [name]."
 				usr << description
 			else
+				usr << "This is a [name]"
 				usr << "It has [arms] arms, [legs] legs, [heads] heads and [tails] tails"
 				usr << "It is a [shapelist[shape]]"
 				usr << description
+
 		OpenThirdEye()
 			set category = "Debug"
 			client.view = 3
+
 		Isolate()
 			set category = "Debug"
 			client.view = 1
@@ -224,6 +250,11 @@ mob/
 			set category = "Debug"
 			for(var/turf/T in world)
 				T.luminosity = 0
+		/*
+		Randomise()
+			set src in view(0)
+			set category = "SCREAM!"
+			Generate(0)*/
 
 		Search()
 			set category = "Action"

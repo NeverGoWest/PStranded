@@ -1,10 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 2
-WINDOW: main.dm;defines.dm;mob.dm;turfdefines.dm
-LAST_COMPILE_VERSION: 504.1234
-FILE: turfdefines.dm
-LAST_COMPILE_TIME: 1401109295
+WINDOW: code\obj\objdefines.dm;docs\notes.dm
+LAST_COMPILE_VERSION: 506.1247
+DIR: code code\client code\mob code\obj code\terrain docs 
+FILE: docs\notes.dm
+LAST_COMPILE_TIME: 1402270963
 AUTO_FILE_DIR: ON
 */
 // END_INTERNALS

@@ -13,6 +13,12 @@ Combat system - Work on this and damage system now. Done. The system is simple b
 
 Weapon wielding - Done for now.
 
+Plant life - Work on this first
+
+Animal life - Then this. We want to be able to grow gardens of plants and breed them for different effects.
+
+Sea life
+
 Dynamic description system - Randomly generated bodily features, scars, tattoos, etc.
 
 Organize files in folders - So we can navigate this a bit easier.

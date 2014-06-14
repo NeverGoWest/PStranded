@@ -1,10 +1,12 @@
 "a" = (/turf,/area)
 "b" = (/turf/forest,/area)
 "c" = (/turf/road,/area)
-"d" = (/mob/ghost,/turf,/area)
-"e" = (/mob/test,/turf,/area)
-"f" = (/obj/car,/obj/corpse,/obj/axe,/turf,/area)
-"g" = (/mob/test2,/turf,/area)
+"d" = (/mob/Creature,/turf,/area)
+"e" = (/mob/ghost,/turf,/area)
+"f" = (/mob/test,/turf,/area)
+"g" = (/obj/car,/obj/corpse,/obj/axe,/turf,/area)
+"h" = (/mob/test2,/turf,/area)
+"i" = (/mob/Creature,/mob/Creature,/turf,/area)
 
 (1,1,1) = {"
 aaaaaaaaaa
@@ -13,8 +15,8 @@ bbbaaaaaaa
 bbbaaaaaaa
 acaaaaaaaa
 acaaaaaaaa
-acaaaaaaaa
-acadaaaaaa
-aceaaaaaaa
-afegaaaaaa
+acaaaaadaa
+acaeaaaaaa
+acfaaaaaaa
+dgfhaaiaaa
 "}

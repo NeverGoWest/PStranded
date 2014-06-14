@@ -14,18 +14,14 @@
 // END_PREFERENCES
 
 // BEGIN_INCLUDE
-#include "area.dm"
-#include "client.dm"
-#include "defines.dm"
-#include "designdoc.dm"
-#include "lore.dm"
-#include "main.dm"
-#include "mob.dm"
-#include "mobai.dm"
-#include "movement.dm"
-#include "notes.dm"
-#include "todo.dm"
-#include "turfdefines.dm"
 #include "world.dmm"
+#include "code\main.dm"
+#include "code\client\client.dm"
+#include "code\mob\mob.dm"
+#include "code\mob\mobai.dm"
+#include "code\mob\movement.dm"
+#include "code\obj\objdefines.dm"
+#include "code\terrain\area.dm"
+#include "code\terrain\turfdefines.dm"
 // END_INCLUDE
 
